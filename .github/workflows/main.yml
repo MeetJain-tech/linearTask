@@ -25,3 +25,8 @@ jobs:
 
       - name: Push Docker Image
         run: docker push meetjainml/marks-api:latest
+
+      - name: Trigger Render Deploy
+        env:
+          RENDER_DEPLOY_HOOK: ${{ secrets.RENDER_DEPLOY_HOOK }}
+        run: curl --fail --show-error --request POST "$RENDER_DEPLOY_HOOK"
